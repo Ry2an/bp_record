@@ -6,11 +6,15 @@ addbp <- function(
   trate1 = 0,
   trate2 = 0
 ){
+  cat("Enter function\n")
   ttime = Sys.Date()
+  cat("Sys.Date = ", ttime, "\n", sep = "")
   tbpdf <- read.csv("D:\\git_file\\bp_record\\bp_record.csv", header = T)
+  cat("Read file success\n")
   pos <- dim(tbpdf)[1] + 1
   notice <- ("Today's Data Added")
   if (tbpdf$time[pos - 1] == as.numeric(ttime)){
+    cat("Enter sameday update process")
     notice <- ("Today's Data Updated")
     pos <- dim(tbpdf)[1]
   }
@@ -18,8 +22,18 @@ addbp <- function(
     cat("数据貌似有问题，请重新尝试\n")
     return()
   }
-  tbpdf$time[pos] <- ttime
-  tbpdf$high1[pos] <- thigh1
+  cat("Start write\nelements:",
+      ttime, "\n",
+      thigh1, "\n",
+      thigh2, "\n",
+      tlow1, "\n",
+      tlow2, "\n",
+      trate1, "\n",
+      trate2,  "\n",
+      pos, "\n", 
+      sep = "")
+  tbpdf[pos, "time"] <- ttime
+  tbpdf[pos, "high1"] <- thigh1
   tbpdf$high2[pos] <- thigh2
   tbpdf$low1[pos] <- tlow1
   tbpdf$low2[pos] <- tlow2
@@ -28,7 +42,7 @@ addbp <- function(
   tbpdf$mhigh[pos] <- (thigh1 + thigh2)/2
   tbpdf$mlow[pos] <- (tlow1 + tlow2)/2
   tbpdf$mrate[pos] <- (trate1 + trate2)/2
-  
+  cat("Write Finish\n")
   write.csv(tbpdf,"D:\\git_file\\bp_record\\bp_record.csv",row.names = F)
   
   cat(notice, "\n")
