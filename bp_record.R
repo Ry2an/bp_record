@@ -32,8 +32,9 @@ addbp <- function(
       trate2,  "\n",
       pos, "\n", 
       sep = "")
+  cat("start write\n")
   tbpdf[pos, "time"] <- ttime
-  tbpdf[pos, "high1"] <- thigh1
+  tbpdf$high1[pos] <- thigh1
   tbpdf$high2[pos] <- thigh2
   tbpdf$low1[pos] <- tlow1
   tbpdf$low2[pos] <- tlow2
